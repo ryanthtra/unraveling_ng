@@ -4,7 +4,6 @@ angular.module('maintenance', ['ngRoute'])
 	.controller('locationsCtrl', LocationsCtrl)
 	.controller('sitesCtrl', SitesCtrl)
 	.factory('currentSpot', currentSpot)
-	.directive('ywActiveMenu', ywActiveMenu)
 	.config(function ($routeProvider)
 		{
 			$routeProvider.when('/locations', 
@@ -70,27 +69,17 @@ function currentSpot()
 	return retObj;
 }
 
-function ywActiveMenu(currentSpot)
-{
-	return function(scope, element, attrs)
-	{
-		var activeMenuId = attrs["YW-ACTIVE-MENU"];
-		var activeTitle = attrs["YwActiveTitle"];
-		currentSpot.setCurrentSpot(activeMenuId, activeTitle);
-	}
-}
-
 function MainCtrl(currentSpot)
 {
-
+	currentSpot.setCurrentSpot('', '');
 }
 
 function LocationsCtrl(currentSpot)
 {
-	
+	currentSpot.setCurrentSpot('Locations', 'Manage the list of diving locations');
 }
 
 function SitesCtrl(currentSpot)
 {
-	
+	currentSpot.setCurrentSpot('Sites', 'Manage the list of dive sites');
 }
